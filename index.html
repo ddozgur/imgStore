@@ -248,6 +248,8 @@
         object-fit: cover;
         transition: all 0.3s ease;
         cursor: pointer;
+        image-orientation: from-image;
+        transform: none !important;
       }
       
       .gallery-item:hover img {
@@ -336,6 +338,7 @@
         width: 100%;
         height: 120px;
         object-fit: cover;
+        image-orientation: from-image;
       }
       
       .thumbnail-remove {
@@ -480,6 +483,7 @@
         object-fit: contain;
         border-radius: 8px;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        image-orientation: from-image;
       }
       
       .image-modal-close {
@@ -858,7 +862,7 @@
     }
   }
 
-  // Seçilen dosyaları listele (EXIF orientation ile)
+  // Seçilen dosyaları listele
   function updateSelectedFilesList(files) {
     if (files.length === 0) {
       selectedFilesList.innerHTML = '';
@@ -870,7 +874,7 @@
       <div class="thumbnail-grid">
         ${files.map((file, index) => `
           <div class="thumbnail-item">
-            <img src="${URL.createObjectURL(file)}" alt="${file.name}" onload="fixImageOrientationOnLoad(this, '${file.name}')">
+            <img src="${URL.createObjectURL(file)}" alt="${file.name}">
             <button class="thumbnail-remove" onclick="removeFile(${index})" title="Dosyayı kaldır">
               ×
             </button>
@@ -879,46 +883,6 @@
       </div>
     `;
   }
-
-  // Thumbnail önizlemede EXIF orientation düzeltme
-  window.fixImageOrientationOnLoad = async function(img, fileName) {
-    try {
-      // Dosyayı bul
-      const file = accumulatedFiles.find(f => f.name === fileName);
-      if (!file) return;
-      
-      const orientation = await getOrientation(file);
-      
-      // Orientation 1 ise (normal), hiçbir şey yapma
-      if (orientation === 1 || orientation === -1) return;
-      
-      // Canvas oluştur ve düzelt
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      
-      let { width, height } = img;
-      
-      // Orientation 5, 6, 7, 8 ise boyutları değiştir
-      if ([5, 6, 7, 8].includes(orientation)) {
-        [width, height] = [height, width];
-      }
-      
-      canvas.width = width;
-      canvas.height = height;
-      
-      // EXIF orientation'a göre resmi çiz
-      if (orientation > 1) {
-        drawImageWithOrientation(ctx, img, orientation, width, height);
-      } else {
-        ctx.drawImage(img, 0, 0, width, height);
-      }
-      
-      // Düzeltilmiş görüntüyü img'e uygula
-      img.src = canvas.toDataURL('image/jpeg', 0.9);
-    } catch (error) {
-      console.error('Thumbnail orientation düzeltme hatası:', error);
-    }
-  };
 
   // Dosyayı listeden kaldır
   window.removeFile = function(index) {
@@ -1291,7 +1255,7 @@
         return;
       }
 
-      // Fotoğrafları göster (EXIF orientation ile)
+      // Fotoğrafları göster
       for (const thumbnailRef of thumbnailsToShow) {
         try {
           // Thumbnail URL'ini al
@@ -1306,8 +1270,7 @@
           galleryItem.innerHTML = `
             <img src="${thumbnailUrl}" alt="Fotoğraf" loading="lazy" 
                  onclick="openImageModal('${thumbnailUrl}', '${fileName}')"
-                 data-file-name="${fileName}"
-                 onload="fixGalleryImageOrientation(this, '${fileName}')">
+                 data-file-name="${fileName}">
           `;
           gallery.appendChild(galleryItem);
         } catch (error) {
@@ -1383,68 +1346,11 @@
   // Fotoğraf sayısını güncelle (artık gerçek zamanlı sayım yapıyoruz)
   // updatePhotoCount fonksiyonu kaldırıldı - Storage-only sistem
 
-  // Galeri görüntülerinde EXIF orientation düzeltme
-  window.fixGalleryImageOrientation = async function(img, fileName) {
-    try {
-      // Storage'dan orijinal dosyayı al
-      const originalsRef = ref(storage, 'originals/');
-      const originalsList = await listAll(originalsRef);
-      
-      // Dosyayı bul
-      const originalFile = originalsList.items.find(item => item.name === fileName);
-      if (!originalFile) {
-        console.log('Orijinal dosya bulunamadı:', fileName);
-        return;
-      }
-      
-      // Download URL'ini al
-      const downloadURL = await getDownloadURL(originalFile);
-      
-      // Dosyayı fetch et
-      const response = await fetch(downloadURL);
-      const blob = await response.blob();
-      
-      // Blob'u File'a çevir
-      const file = new File([blob], fileName, { type: blob.type });
-      
-      // EXIF orientation'ı kontrol et
-      const orientation = await getOrientation(file);
-      
-      // Orientation 1 ise (normal), hiçbir şey yapma
-      if (orientation === 1 || orientation === -1) return;
-      
-      // Canvas oluştur ve düzelt
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      
-      let { width, height } = img;
-      
-      // Orientation 5, 6, 7, 8 ise boyutları değiştir
-      if ([5, 6, 7, 8].includes(orientation)) {
-        [width, height] = [height, width];
-      }
-      
-      canvas.width = width;
-      canvas.height = height;
-      
-      // EXIF orientation'a göre resmi çiz
-      if (orientation > 1) {
-        drawImageWithOrientation(ctx, img, orientation, width, height);
-      } else {
-        ctx.drawImage(img, 0, 0, width, height);
-      }
-      
-      // Düzeltilmiş görüntüyü img'e uygula
-      img.src = canvas.toDataURL('image/jpeg', 0.9);
-    } catch (error) {
-      console.error('Galeri orientation düzeltme hatası:', error);
-    }
-  };
 
   // Global loadPhotos fonksiyonu
   window.loadPhotos = loadPhotos;
   
-  // Image Modal fonksiyonları (EXIF orientation desteği ile)
+  // Image Modal fonksiyonları
   window.openImageModal = function(imageSrc, fileName = 'Fotoğraf') {
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
@@ -1456,83 +1362,8 @@
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
     
-    // EXIF orientation'ı uygula
-    modalImg.onload = function() {
-      // CSS ile orientation düzeltmesi
-      modalImg.style.transform = '';
-      modalImg.style.maxWidth = '90%';
-      modalImg.style.maxHeight = '90%';
-      modalImg.style.objectFit = 'contain';
-      
-      // Storage'dan orijinal dosyayı al ve EXIF orientation'ı uygula
-      applyOrientationToModalImage(modalImg, fileName);
-    };
-    
     console.log('Modal açıldı:', fileName);
   };
-
-  // Modal görüntüsüne EXIF orientation uygula
-  async function applyOrientationToModalImage(modalImg, fileName) {
-    try {
-      // Storage'dan orijinal dosyayı al
-      const originalsRef = ref(storage, 'originals/');
-      const originalsList = await listAll(originalsRef);
-      
-      // Dosyayı bul
-      const originalFile = originalsList.items.find(item => item.name === fileName);
-      if (!originalFile) {
-        console.log('Orijinal dosya bulunamadı:', fileName);
-        return;
-      }
-      
-      // Download URL'ini al
-      const downloadURL = await getDownloadURL(originalFile);
-      
-      // Dosyayı fetch et
-      const response = await fetch(downloadURL);
-      const blob = await response.blob();
-      
-      // Blob'u File'a çevir
-      const file = new File([blob], fileName, { type: blob.type });
-      
-      // EXIF orientation'ı kontrol et
-      const orientation = await getOrientation(file);
-      
-      // Orientation 1 ise (normal), hiçbir şey yapma
-      if (orientation === 1 || orientation === -1) return;
-      
-      // Canvas oluştur ve düzelt
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
-      
-      img.onload = () => {
-        let { width, height } = img;
-        
-        // Orientation 5, 6, 7, 8 ise boyutları değiştir
-        if ([5, 6, 7, 8].includes(orientation)) {
-          [width, height] = [height, width];
-        }
-        
-        canvas.width = width;
-        canvas.height = height;
-        
-        // EXIF orientation'a göre resmi çiz
-        if (orientation > 1) {
-          drawImageWithOrientation(ctx, img, orientation, width, height);
-        } else {
-          ctx.drawImage(img, 0, 0, width, height);
-        }
-        
-        // Düzeltilmiş görüntüyü modal'a uygula
-        modalImg.src = canvas.toDataURL('image/jpeg', 0.9);
-      };
-      
-      img.src = URL.createObjectURL(file);
-    } catch (error) {
-      console.error('Modal orientation düzeltme hatası:', error);
-    }
-  }
   
   window.closeImageModal = function() {
     const modal = document.getElementById('imageModal');
