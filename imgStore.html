@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>İrem & Eralp - Düğün Fotoğrafları</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+      :root {
+        --primary: #1a1a1a;
+        --secondary: #f8f8f8;
+        --accent: #d4af37;
+        --accent-light: #f4e4bc;
+        --text: #333;
+        --text-light: #666;
+        --white: #ffffff;
+        --shadow: rgba(0,0,0,0.1);
+        --shadow-hover: rgba(0,0,0,0.15);
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body { 
+        background: var(--white);
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        color: var(--text);
+        line-height: 1.6;
+      }
+      
+      .hero-section {
+        background: linear-gradient(135deg, var(--primary) 0%, #2c2c2c 100%);
+        color: var(--white);
+        padding: 2.5rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+      }
+      
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+      }
+      
+      .hero-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 4rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        color: var(--accent);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      }
+      
+      .hero-subtitle {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.4rem;
+        font-weight: 300;
+        opacity: 0.9;
+        margin-bottom: 0.5rem;
+      }
+      
+      .hero-date {
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        opacity: 0.8;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      
+      .main-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      
+      .section {
+        margin: 4rem 0;
+        margin-bottom: 1px;
+      }
+      
+      .section-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--text);
+        position: relative;
+      }
+      
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 2px;
+        background: var(--accent);
+      }
+      
+      .card {
+        background: var(--white);
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px var(--shadow);
+        margin-bottom: 2rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px var(--shadow-hover);
+      }
+      
+      .card-header {
+        background: var(--secondary);
+        border-bottom: 1px solid #eee;
+        padding: 1.5rem;
+      }
+      
+      .card-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+        color: var(--text);
+      }
+      
+      .btn-primary {
+        background: var(--accent);
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-weight: 500;
+        color: var(--white);
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+      }
+      
+      .btn-primary:hover {
+        background: #b8941f;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        color: var(--white);
+      }
+      
+      .form-control {
+        border: 2px solid #eee;
+        border-radius: 8px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+      }
+      
+      .form-control:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.15);
+      }
+      
+      .file-input-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+      }
+      
+      .file-input-wrapper input[type="file"] {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+      }
+      
+      .file-input-label {
+        display: block;
+        width: 100%;
+        padding: 12px 16px;
+        background: var(--white);
+        border: 2px solid #eee;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+        text-align: center;
+        color: var(--text-light);
+      }
+      
+      .file-input-label:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      
+      .file-input-label:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.15);
+      }
+      
+      .gallery-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1.5rem 0;
+        padding: 0 0.5rem;
+      }
+      
+      .gallery-item {
+        flex: 0 0 calc(50% - 0.25rem);
+        max-width: calc(50% - 0.25rem);
+      }
+      
+      .gallery-item {
+        background: var(--white);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px var(--shadow);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      
+      .gallery-item:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 40px var(--shadow-hover);
+      }
+      
+      .gallery-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+      
+      .gallery-item-info {
+        padding: 1rem;
+      }
+      
+      .gallery-item-date {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin-bottom: 0.5rem;
+      }
+      
+      .gallery-item-name {
+        font-size: 0.9rem;
+        color: var(--text);
+        font-weight: 500;
+      }
+      
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 2rem 0;
+        padding: 0 1rem;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      
+      .pagination .page-link {
+        background: var(--white);
+        border: 2px solid #eee;
+        color: var(--text);
+        border-radius: 8px;
+        padding: 8px 16px;
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+      }
+      
+      .pagination .page-link:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--white);
+        transform: translateY(-2px);
+      }
+      
+      .pagination .page-item.active .page-link {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--white);
+      }
+      
+      .pagination .page-item.disabled .page-link {
+        background: #f5f5f5;
+        border-color: #eee;
+        color: #999;
+        cursor: not-allowed;
+      }
+      
+      .thumbnail-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+      
+      .thumbnail-item {
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px var(--shadow);
+        transition: all 0.3s ease;
+      }
+      
+      .thumbnail-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 20px var(--shadow-hover);
+      }
+      
+      .thumbnail-item img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+      }
+      
+      .thumbnail-remove {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background: rgba(255, 0, 0, 0.8);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .thumbnail-remove:hover {
+        background: rgba(255, 0, 0, 1);
+        transform: scale(1.1);
+      }
+      
+      .invitation-card {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 2rem 0;
+        box-shadow: 0 8px 30px var(--shadow);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .invitation-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
+      }
+      
+      .invitation-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px var(--shadow);
+        margin-bottom: 2rem;
+      }
+      
+      .couple-names {
+        font-family: 'Great Vibes', cursive;
+        font-size: 3rem;
+        color: var(--accent);
+        font-weight: 400;
+        margin-bottom: 1rem;
+      }
+      
+      .wedding-date {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        color: var(--text);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .wedding-time {
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      
+      .wedding-message {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.1rem;
+        color: var(--text);
+        font-style: italic;
+        line-height: 1.6;
+      }
+      
+      .download-section {
+        text-align: center;
+        margin: 2rem 0;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      @media (max-width: 768px) {
+        .download-section {
+          display: none !important;
+        }
+      }
+      
+      .download-btn {
+        background: var(--accent);
+        border: none;
+        border-radius: 50px;
+        padding: 15px 30px;
+        font-weight: 600;
+        color: var(--white);
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      }
+      
+      .download-btn:hover {
+        background: #b8941f;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        color: var(--white);
+      }
+      
+      .image-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(60, 60, 60, 0.85);
+        backdrop-filter: blur(5px);
+      }
+      
+      .image-modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 330px;
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+      
+      .image-modal-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: var(--white);
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1001;
+        transition: all 0.3s ease;
+      }
+      
+      .image-modal-close:hover {
+        color: var(--accent);
+        transform: scale(1.1);
+      }
+      
+      .gallery-item img {
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .gallery-item img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px var(--shadow-hover);
+      }
+      
+      @media (max-width: 768px) {
+        .main-container {
+          padding: 0 0.5rem;
+        }
+        
+        .hero-section {
+          padding: 1.5rem 0;
+        }
+        
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+          font-size: 1rem;
+        }
+        
+        .section-title {
+          font-size: 1.8rem;
+        }
+        
+        .couple-names {
+          font-size: 2rem;
+        }
+        
+        .wedding-date {
+          font-size: 1.2rem;
+        }
+        
+        .gallery-grid {
+          gap: 0.3rem !important;
+          padding: 0 0.3rem !important;
+        }
+        
+        .gallery-item {
+          flex: 0 0 calc(50% - 0.15rem) !important;
+          max-width: calc(50% - 0.15rem) !important;
+        }
+        
+        .gallery-item img {
+          height: 175px;
+          object-fit: cover;
+          width: 100%;
+        }
+        
+        .pagination {
+          gap: 0.3rem !important;
+          padding: 0 0.5rem !important;
+          justify-content: center !important;
+          width: 100% !important;
+        }
+        
+        .pagination .page-link {
+          padding: 6px 12px;
+          font-size: 0.8rem;
+          flex-shrink: 0;
+        }
+        
+        .thumbnail-grid {
+          grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        }
+        
+        .card-header {
+          padding: 1rem;
+        }
+        
+        .card-title {
+          font-size: 1.2rem;
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .hero-title {
+          font-size: 2rem;
+        }
+        
+        .hero-subtitle {
+          font-size: 0.9rem;
+        }
+        
+        .section-title {
+          font-size: 1.5rem;
+        }
+        
+        .couple-names {
+          font-size: 1.8rem;
+        }
+        
+        .wedding-date {
+          font-size: 1rem;
+        }
+        
+        .wedding-time {
+          font-size: 0.8rem;
+        }
+        
+        .wedding-message {
+          font-size: 0.9rem;
+        }
+        
+        .gallery-grid {
+          gap: 0.2rem !important;
+          padding: 0 0.2rem !important;
+        }
+        
+        .gallery-item {
+          flex: 0 0 calc(50% - 0.1rem) !important;
+          max-width: calc(50% - 0.1rem) !important;
+        }
+        
+        .gallery-item img {
+          height: 175px;
+          object-fit: cover;
+          width: 100%;
+        }
+        
+        .pagination {
+          gap: 0.2rem !important;
+          padding: 0 0.3rem !important;
+          justify-content: center !important;
+          width: 100% !important;
+        }
+        
+        .pagination .page-link {
+          padding: 4px 8px;
+          font-size: 0.7rem;
+          flex-shrink: 0;
+        }
+        
+        .thumbnail-grid {
+          grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        }
+        
+        .invitation-card {
+          padding: 1rem;
+        }
+        
+        .card-header {
+          padding: 0.8rem;
+        }
+        
+        .card-title {
+          font-size: 1.1rem;
+        }
+        
+        .btn-primary {
+          padding: 10px 20px;
+          font-size: 0.8rem;
+        }
+        
+        .download-section {
+          display: none !important;
+        }
+      }
+      
+      /* Footer Styles */
+      .footer {
+        background: linear-gradient(135deg, var(--primary) 0%, #2c2c2c 100%);
+        color: var(--white);
+        padding: 2rem 0;
+        margin-top: 0.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+      }
+      
+      .footer-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+      }
+      
+      .footer-text {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.1rem;
+        font-weight: 400;
+        opacity: 0.9;
+        margin: 0;
+      }
+      
+      .footer-text p {
+        margin: 0;
+        color: var(--accent-light);
+      }
+      
+      @media (max-width: 768px) {
+        .footer {
+          padding: 1.5rem 0;
+          margin-top: 0.2rem;
+        }
+        
+        .footer-text {
+          font-size: 1rem;
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .footer {
+          padding: 1rem 0;
+          margin-top: 0.1rem;
+        }
+        
+        .footer-text {
+          font-size: 0.9rem;
+        }
+      }
+  </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<div class="hero-section">
+  <div class="main-container">
+    <div class="hero-content">
+      <div class="hero-title">İrem & Eralp</div>
+      <div class="hero-subtitle">Anılarımızı birlikte yaşayalım, fotoğraflarınızla anlarımızı ölümsüzleştirelim</div>
+      <div class="hero-date">18 Ekim 2025 | Cumartesi 19:00</div>
+    </div>
+  </div>
+</div>
+
+<div class="main-container">
+  <!-- Davetiye Bölümü -->
+  <div class="invitation-card">
+    <img src="Başlıksız.jpeg" alt="Düğün Davetiyesi" class="invitation-image">
+    <div class="couple-names">İrem & Eralp</div>
+    <div class="wedding-date">18 Ekim 2025</div>
+    <div class="wedding-time">Cumartesi | 19:00</div>
+    <div class="wedding-message">Sevgili dostlarımız, nişanımızın en güzel anlarını sizlerle paylaşmak istiyoruz. Çektiğiniz fotoğrafları buraya yükleyerek anılarımızı birlikte oluşturalım. Her kare, bizim için çok değerli! 💕</div>
+  </div>
+
+
+  <!-- Fotoğraf Yükleme -->
+  <div class="section">
+    <!-- <h2 class="section-title">Fotoğraf Paylaş</h2> -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Anılarınızı Paylaşın</h3>
+      </div>
+      <div class="p-4">
+        <div class="file-input-wrapper mb-3">
+          <input type="file" id="fileInput" accept="image/*" multiple>
+          <label for="fileInput" class="file-input-label">
+            📸 Fotoğraf Seçin
+          </label>
+        </div>
+        <button id="uploadBtn" class="btn-primary w-100">Fotoğrafları Paylaş</button>
+        <div id="selectedFilesList" class="mt-3"></div>
+    <div id="uploadStatus" class="mt-3"></div>
+        <div id="uploadProgress" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Galeri -->
+  <div class="section">
+    <h2 class="section-title">Anılarımız</h2>
+    <div id="gallery" class="gallery-grid"></div>
+  </div>
+
+  <!-- İndirme Butonu -->
+  <div class="download-section">
+    <button class="download-btn" onclick="downloadAllPhotos()">
+      📥 Tüm Fotoğrafları İndir (ZIP)
+    </button>
+  </div>
+</div>
+
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal">
+  <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+  <img class="image-modal-content" id="modalImage">
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, startAfter } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+  // 🔥 Düğün Firebase projenin config objesi
+  const firebaseConfig = {
+    apiKey: "AIzaSyDlKuL9iFsnwUVrMRUmpq5EPllIMM0UJLE",
+    authDomain: "imgstore-97bd9.firebaseapp.com",
+    projectId: "imgstore-97bd9",
+    storageBucket: "imgstore-97bd9.firebasestorage.app",
+    messagingSenderId: "1080857828086",
+    appId: "1:1080857828086:web:30b6b0210981ad7d192ad7",
+    measurementId: "G-NQRPZYW82J"
+  };
+
+  // Firebase başlat
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+  
+
+  const fileInput = document.getElementById("fileInput");
+  const uploadBtn = document.getElementById("uploadBtn");
+  const selectedFilesList = document.getElementById("selectedFilesList");
+  const uploadStatus = document.getElementById("uploadStatus");
+  const uploadProgress = document.getElementById("uploadProgress");
+  const gallery = document.getElementById("gallery");
+
+  // Seçilen dosyaları biriktir
+  let accumulatedFiles = [];
+
+  // Dosya seçimi değiştiğinde listeye ekle
+  fileInput.addEventListener("change", (e) => {
+    const newFiles = Array.from(e.target.files);
+    
+    // Yeni dosyaları mevcut listeye ekle
+    accumulatedFiles.push(...newFiles);
+    
+    // Listeyi güncelle
+    updateSelectedFilesList(accumulatedFiles);
+    
+    // Label'ı güncelle
+    updateFileInputLabel();
+    
+    // Input'u temizle (bir sonraki seçim için)
+    fileInput.value = "";
+  });
+  
+  // File input label'ını güncelle
+  function updateFileInputLabel() {
+    const label = document.querySelector('.file-input-label');
+    if (accumulatedFiles.length > 0) {
+      label.textContent = `📸 ${accumulatedFiles.length} fotoğraf seçildi`;
+      label.style.color = 'var(--accent)';
+      label.style.borderColor = 'var(--accent)';
+    } else {
+      label.textContent = '📸 Fotoğraf Seçin';
+      label.style.color = 'var(--text-light)';
+      label.style.borderColor = '#eee';
+    }
+  }
+
+  // Seçilen dosyaları listele
+  function updateSelectedFilesList(files) {
+    if (files.length === 0) {
+      selectedFilesList.innerHTML = '';
+      return;
+    }
+
+    selectedFilesList.innerHTML = `
+      <h6 style="margin-bottom: 1rem; color: var(--text); font-weight: 600;">📋 Seçilen Dosyalar (${files.length})</h6>
+      <div class="thumbnail-grid">
+        ${files.map((file, index) => `
+          <div class="thumbnail-item">
+            <img src="${URL.createObjectURL(file)}" alt="${file.name}">
+            <button class="thumbnail-remove" onclick="removeFile(${index})" title="Dosyayı kaldır">
+              ×
+            </button>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  // Dosyayı listeden kaldır
+  window.removeFile = function(index) {
+    accumulatedFiles.splice(index, 1);
+    updateSelectedFilesList(accumulatedFiles);
+    updateFileInputLabel();
+  };
+
+  // Firebase Storage + Firestore Upload Sistemi
+  uploadBtn.addEventListener("click", async () => {
+    if (accumulatedFiles.length === 0) { 
+      alert("Lütfen fotoğraf seçin!"); 
+      return; 
+    }
+
+    uploadStatus.innerHTML = `<div class="spinner-border spinner-border-sm me-2"></div>${accumulatedFiles.length} fotoğraf yükleniyor...`;
+    uploadProgress.innerHTML = "";
+
+    let successCount = 0;
+    let errorCount = 0;
+
+    try {
+      // Her dosya için yükleme
+      for (let i = 0; i < accumulatedFiles.length; i++) {
+        const file = accumulatedFiles[i];
+        
+        // Progress güncelle
+        uploadProgress.innerHTML = `
+          <div class="progress mb-2">
+            <div class="progress-bar" style="width: ${((i + 1) / accumulatedFiles.length) * 100}%"></div>
+          </div>
+          <small>Yükleniyor: ${i + 1}/${accumulatedFiles.length} - ${file.name}</small>
+        `;
+
+        try {
+          // Thumbnail oluştur
+          const thumbnailBlob = await createThumbnail(file);
+          
+          // Sadece thumbnail'i Storage'a yükle (maliyet optimizasyonu)
+          const timestamp = Date.now();
+          // Dosya adını ve uzantısını ayır
+          const fileName = file.name;
+          const lastDotIndex = fileName.lastIndexOf('.');
+          const nameWithoutExt = lastDotIndex > 0 ? fileName.substring(0, lastDotIndex) : fileName;
+          const extension = lastDotIndex > 0 ? fileName.substring(lastDotIndex) : '';
+          const thumbnailFileName = `${timestamp}_${nameWithoutExt}_thumb${extension}`;
+          const thumbnailUrl = await uploadToStorage(thumbnailBlob, 'thumbnails', thumbnailFileName);
+          
+          // Orijinal dosyayı da Storage'a yükle (tıklayınca açılması için)
+          const originalUrl = await uploadToStorage(file, 'originals');
+          
+          // Sadece Storage kullanıyoruz - Firestore'a kayıt yok!
+          console.log("Storage'a kaydedildi:", file.name);
+          successCount++;
+          
+          // Sayı gerçek zamanlı olarak güncelleniyor
+
+        } catch (err) {
+          console.error(`Upload hatası (${file.name}):`, err);
+          errorCount++;
+        }
+      }
+
+      // Sonuç göster
+      if (successCount > 0) {
+        uploadStatus.innerHTML = `<span class="text-success">✅ ${successCount} fotoğraf başarıyla yüklendi!</span>`;
+        if (errorCount > 0) {
+          uploadStatus.innerHTML += `<br><span class="text-warning">⚠️ ${errorCount} fotoğraf yüklenemedi.</span>`;
+        }
+      } else {
+        uploadStatus.innerHTML = `<span class="text-danger">❌ Hiçbir fotoğraf yüklenemedi!</span>`;
+      }
+
+      // Temizle
+      fileInput.value = "";
+      accumulatedFiles = [];
+      selectedFilesList.innerHTML = "";
+      uploadProgress.innerHTML = "";
+      updateFileInputLabel(); // File input label'ını sıfırla
+      
+      // Galeriyi güncelle
+      loadPhotos();
+
+    } catch (err) {
+      console.error("Genel upload hatası:", err);
+      uploadStatus.innerHTML = `<span class="text-danger">❌ Yükleme hatası: ${err.message}</span>`;
+      uploadProgress.innerHTML = "";
+    }
+  });
+
+  // Firebase Storage'a dosya yükleme fonksiyonu
+  async function uploadToStorage(file, folder, customName = null) {
+    try {
+      // Dosya adını oluştur
+      let fileName;
+      if (customName) {
+        // Eğer customName verilmişse, timestamp zaten eklenmiş demektir
+        fileName = customName;
+      } else {
+        // Eğer customName verilmemişse, timestamp ekle
+        const timestamp = Date.now();
+        fileName = `${timestamp}_${file.name}`;
+      }
+      const storageRef = ref(storage, `${folder}/${fileName}`);
+      
+      // Dosyayı yükle
+      const snapshot = await uploadBytes(storageRef, file);
+      
+      // Download URL'ini al
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      
+      return downloadURL;
+    } catch (error) {
+      console.error('Storage upload hatası:', error);
+      throw error;
+    }
+  }
+
+
+  // Thumbnail oluşturma fonksiyonu (400px genişlik, daha iyi görünüm)
+  function createThumbnail(file) {
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = () => {
+        // Orijinal boyutları al
+        let { width, height } = img;
+        
+        // Thumbnail boyutları (400px genişlik - daha iyi görünüm)
+        const maxWidth = 400;
+        const maxHeight = 400;
+        
+        // Boyutları orantılı olarak küçült
+        if (width > maxWidth || height > maxHeight) {
+          const ratio = Math.min(maxWidth / width, maxHeight / height);
+          width *= ratio;
+          height *= ratio;
+        }
+        
+        // Canvas boyutunu ayarla
+        canvas.width = width;
+        canvas.height = height;
+        
+        // Resmi çiz
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Kaliteyi ayarla (0.75 = %75 kalite, daha küçük dosya)
+        canvas.toBlob(resolve, 'image/jpeg', 0.75);
+      };
+      
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+
+  // Galeriyi yükleme (gerçek sayfalama ile optimize)
+  let currentPage = 1;
+  const photosPerPage = 6; // Sayfa başına 6 fotoğraf (2x3 grid) - maliyet optimizasyonu
+  let totalPhotos = 0;
+  let pageCursors = []; // Her sayfa için cursor'ları sakla
+
+  async function loadPhotos(page = 1) {
+    gallery.innerHTML = '<div class="col-12 text-center"><div class="spinner-border" role="status"></div></div>';
+    
+    try {
+      // Storage'dan thumbnail'leri listele
+      const thumbnailsRef = ref(storage, 'thumbnails/');
+      const thumbnailsList = await listAll(thumbnailsRef);
+      
+      console.log('Storage thumbnail listesi:', thumbnailsList);
+      console.log('Thumbnail items:', thumbnailsList.items);
+      
+      // Toplam fotoğraf sayısını al
+      if (page === 1) {
+        totalPhotos = thumbnailsList.items.length;
+        console.log(`Storage'da ${totalPhotos} thumbnail bulundu`);
+      }
+
+      // Sayfalama için thumbnail'leri slice yap
+      const startIndex = (page - 1) * photosPerPage;
+      const endIndex = startIndex + photosPerPage;
+      const thumbnailsToShow = thumbnailsList.items.slice(startIndex, endIndex);
+
+    gallery.innerHTML = "";
+
+      if (thumbnailsToShow.length === 0) {
+        gallery.innerHTML = '<div class="col-12 text-center text-muted"><p>Henüz fotoğraf yüklenmemiş.</p></div>';
+        return;
+      }
+
+      // Fotoğrafları göster (Sadece thumbnail - orijinal istek yok)
+      for (const thumbnailRef of thumbnailsToShow) {
+        try {
+          // Thumbnail URL'ini al
+          const thumbnailUrl = await getDownloadURL(thumbnailRef);
+          
+          // Dosya adını bul (thumbnail adından)
+          const thumbnailName = thumbnailRef.name;
+          // Thumbnail adından orijinal dosya adını çıkar
+          // Format: timestamp_originalname_thumb.extension
+          let fileName;
+          const thumbIndex = thumbnailName.indexOf('_thumb');
+          if (thumbIndex > -1) {
+            const beforeThumb = thumbnailName.substring(0, thumbIndex);
+            const afterThumb = thumbnailName.substring(thumbIndex + 6); // '_thumb' uzunluğu 6
+            const timestampIndex = beforeThumb.indexOf('_');
+            fileName = timestampIndex > -1 ? beforeThumb.substring(timestampIndex + 1) + afterThumb : beforeThumb + afterThumb;
+          } else {
+            fileName = thumbnailName; // Fallback
+          }
+          
+          const galleryItem = document.createElement("div");
+          galleryItem.className = "gallery-item";
+          galleryItem.innerHTML = `
+            <img src="${thumbnailUrl}" alt="Fotoğraf" loading="lazy" 
+                 onclick="openImageModal('${thumbnailUrl}', '${fileName}')"
+                 data-file-name="${fileName}">
+          `;
+          gallery.appendChild(galleryItem);
+        } catch (error) {
+          console.error('Thumbnail yükleme hatası:', error);
+        }
+      }
+
+      // Sayfalama kontrolleri ekle
+      addPaginationControls(page, thumbnailsToShow.length);
+    } catch (err) {
+      console.error("Galeri yükleme hatası:", err);
+      gallery.innerHTML = '<div class="col-12 text-center text-danger"><p>Galeri yüklenirken hata oluştu.</p></div>';
+    }
+  }
+
+  // Tek fotoğraf indirme fonksiyonu (Storage URL'den)
+  window.downloadPhoto = async function(downloadURL, fileName) {
+    try {
+      // Storage'dan dosyayı indir
+      const response = await fetch(downloadURL);
+      const blob = await response.blob();
+      
+      // İndirme linki oluştur
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName || 'fotoğraf.jpg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      console.log('Fotoğraf indirildi:', fileName);
+    } catch (err) {
+      console.error('İndirme hatası:', err);
+      alert('Fotoğraf indirilemedi: ' + err.message);
+    }
+  };
+
+  // Sayfalama kontrolleri ekle
+  function addPaginationControls(currentPage, currentPageSize) {
+    const totalPages = Math.ceil(totalPhotos / photosPerPage);
+    const hasNextPage = currentPage < totalPages; // Sonraki sayfa var mı?
+    const hasPrevPage = currentPage > 1; // Önceki sayfa var mı?
+    
+    // Eğer hiç fotoğraf yoksa sayfalama gösterme
+    if (totalPhotos === 0) return;
+    
+    const paginationDiv = document.createElement('div');
+    paginationDiv.className = 'pagination';
+    
+    // Tek sayfa varsa sadece sayfa bilgisini göster, butonları gösterme
+    if (totalPages <= 1) {
+      paginationDiv.innerHTML = `
+        <span class="page-link active">${currentPage} / ${totalPages}</span>
+      `;
+    } else {
+      // Çoklu sayfa varsa tüm kontrolleri göster
+      paginationDiv.innerHTML = `
+        <button class="page-link ${!hasPrevPage ? 'disabled' : ''}" onclick="loadPhotos(${currentPage - 1})" ${!hasPrevPage ? 'disabled' : ''}>
+          ← Önceki
+        </button>
+        <span class="page-link active">${currentPage} / ${totalPages}</span>
+        <button class="page-link ${!hasNextPage ? 'disabled' : ''}" onclick="loadPhotos(${currentPage + 1})" ${!hasNextPage ? 'disabled' : ''}>
+          Sonraki →
+        </button>
+      `;
+    }
+    
+    gallery.appendChild(paginationDiv);
+  }
+
+  // Fotoğraf sayısını güncelle (artık gerçek zamanlı sayım yapıyoruz)
+  // updatePhotoCount fonksiyonu kaldırıldı - Storage-only sistem
+
+  // Global loadPhotos fonksiyonu
+  window.loadPhotos = loadPhotos;
+  
+  // Image Modal fonksiyonları (thumbnail boyutunda)
+  window.openImageModal = function(imageSrc, fileName = 'Fotoğraf') {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    
+    // Modal'ı aç
+    modalImg.src = imageSrc;
+    modalImg.alt = fileName;
+    modalImg.style.display = 'block';
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    console.log('Thumbnail modal açıldı:', fileName);
+  };
+  
+  window.closeImageModal = function() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  };
+  
+  // ESC tuşu ile kapat
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeImageModal();
+    }
+  });
+  
+  // Modal dışına tıklayınca kapat
+  window.onclick = function(event) {
+    const modal = document.getElementById('imageModal');
+    if (event.target === modal) {
+      closeImageModal();
+    }
+  };
+
+  // Toplu indirme butonu ekle
+  function addBulkDownloadButton() {
+    // Download section zaten HTML'de var, bu fonksiyon artık gerekli değil
+    console.log("Download button zaten HTML'de mevcut");
+  }
+
+  // Tüm fotoğrafları ZIP olarak indir (optimized)
+  window.downloadAllPhotos = async function() {
+    try {
+      // Progress göster
+      const progressDiv = document.createElement('div');
+      progressDiv.innerHTML = '<div class="alert alert-info">📥 Fotoğraflar hazırlanıyor...</div>';
+      document.body.appendChild(progressDiv);
+
+    const q = query(collection(db, "photos"), orderBy("createdAt", "desc"));
+    const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        alert('İndirilecek fotoğraf bulunamadı!');
+        document.body.removeChild(progressDiv);
+        return;
+      }
+
+      const photoCount = querySnapshot.size;
+      console.log(`Toplu indirme başlıyor: ${photoCount} fotoğraf`);
+
+      // JSZip kütüphanesi yükle (CDN'den)
+      if (typeof JSZip === 'undefined') {
+        progressDiv.innerHTML = '<div class="alert alert-info">📦 ZIP kütüphanesi yükleniyor...</div>';
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+        script.onload = () => downloadAllPhotos();
+        document.head.appendChild(script);
+        return;
+      }
+
+      progressDiv.innerHTML = '<div class="alert alert-info">🔄 Fotoğraflar işleniyor...</div>';
+      const zip = new JSZip();
+      let processedCount = 0;
+
+      // Her fotoğraf için ayrı işlem
+      for (const doc of querySnapshot.docs) {
+        const photo = doc.data();
+        const fileName = photo.fileName || `fotoğraf_${processedCount + 1}.jpg`;
+        
+        try {
+          // Storage'dan dosyayı indir
+          const response = await fetch(photo.downloadURL);
+          const blob = await response.blob();
+          
+          // ZIP'e ekle
+          zip.file(fileName, blob);
+          processedCount++;
+          
+          // Progress güncelle
+          progressDiv.innerHTML = `<div class="alert alert-info">🔄 İşleniyor: ${processedCount}/${photoCount}</div>`;
+          
+          // UI'yi güncelle
+          await new Promise(resolve => setTimeout(resolve, 10));
+        } catch (error) {
+          console.error(`Fotoğraf indirme hatası (${fileName}):`, error);
+          // Hata olsa da devam et
+          processedCount++;
+        }
+      }
+
+      progressDiv.innerHTML = '<div class="alert alert-info">📦 ZIP dosyası oluşturuluyor...</div>';
+      
+      // ZIP'i oluştur
+      const content = await zip.generateAsync({ 
+        type: 'blob',
+        compression: 'DEFLATE',
+        compressionOptions: { level: 6 }
+      });
+      
+      // İndir
+      const url = window.URL.createObjectURL(content);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `düğün_fotoğrafları_${new Date().toISOString().split('T')[0]}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      // Temizle
+      document.body.removeChild(progressDiv);
+      
+      console.log(`✅ ${photoCount} fotoğraf ZIP olarak indirildi`);
+      alert(`✅ ${photoCount} fotoğraf başarıyla indirildi!`);
+      
+    } catch (err) {
+      console.error('Toplu indirme hatası:', err);
+      alert('Toplu indirme başarısız: ' + err.message);
+      // Progress'i temizle
+      const progressDiv = document.querySelector('.alert-info');
+      if (progressDiv) document.body.removeChild(progressDiv);
+    }
+  };
+
+  loadPhotos();
+  addBulkDownloadButton();
+</script>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="main-container">
+    <div class="footer-content">
+      <div class="footer-text">
+        <p>Coded with love ❤️ by Özgür Düzenli</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
