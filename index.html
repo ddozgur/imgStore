@@ -899,7 +899,6 @@
 
     let successCount = 0;
     let errorCount = 0;
-    let duplicateCount = 0;
 
     try {
       // Her dosya için yükleme
@@ -915,19 +914,18 @@
         `;
 
         try {
-          // Duplicate kontrolü yap
-          const isDuplicate = await checkDuplicateFile(file.name, file.size);
-          
-          if (isDuplicate) {
-            duplicateCount++;
-            continue; // Bu dosyayı atla
-          }
-          
           // Thumbnail oluştur
           const thumbnailBlob = await createThumbnail(file);
           
           // Sadece thumbnail'i Storage'a yükle (maliyet optimizasyonu)
-          const thumbnailUrl = await uploadToStorage(thumbnailBlob, 'thumbnails', `${file.name}_thumb`);
+          const timestamp = Date.now();
+          // Dosya adını ve uzantısını ayır
+          const fileName = file.name;
+          const lastDotIndex = fileName.lastIndexOf('.');
+          const nameWithoutExt = lastDotIndex > 0 ? fileName.substring(0, lastDotIndex) : fileName;
+          const extension = lastDotIndex > 0 ? fileName.substring(lastDotIndex) : '';
+          const thumbnailFileName = `${timestamp}_${nameWithoutExt}_thumb${extension}`;
+          const thumbnailUrl = await uploadToStorage(thumbnailBlob, 'thumbnails', thumbnailFileName);
           
           // Orijinal dosyayı da Storage'a yükle (tıklayınca açılması için)
           const originalUrl = await uploadToStorage(file, 'originals');
@@ -947,14 +945,6 @@
       // Sonuç göster
       if (successCount > 0) {
         uploadStatus.innerHTML = `<span class="text-success">✅ ${successCount} fotoğraf başarıyla yüklendi!</span>`;
-        if (duplicateCount > 0) {
-          uploadStatus.innerHTML += `<br><span class="text-info">ℹ️ ${duplicateCount} fotoğraf daha önce yüklenmiş.</span>`;
-        }
-        if (errorCount > 0) {
-          uploadStatus.innerHTML += `<br><span class="text-warning">⚠️ ${errorCount} fotoğraf yüklenemedi.</span>`;
-        }
-      } else if (duplicateCount > 0) {
-        uploadStatus.innerHTML = `<span class="text-info">ℹ️ ${duplicateCount} fotoğraf daha önce yüklenmiş.</span>`;
         if (errorCount > 0) {
           uploadStatus.innerHTML += `<br><span class="text-warning">⚠️ ${errorCount} fotoğraf yüklenemedi.</span>`;
         }
@@ -983,8 +973,15 @@
   async function uploadToStorage(file, folder, customName = null) {
     try {
       // Dosya adını oluştur
-      const timestamp = Date.now();
-      const fileName = customName || `${timestamp}_${file.name}`;
+      let fileName;
+      if (customName) {
+        // Eğer customName verilmişse, timestamp zaten eklenmiş demektir
+        fileName = customName;
+      } else {
+        // Eğer customName verilmemişse, timestamp ekle
+        const timestamp = Date.now();
+        fileName = `${timestamp}_${file.name}`;
+      }
       const storageRef = ref(storage, `${folder}/${fileName}`);
       
       // Dosyayı yükle
@@ -1000,39 +997,6 @@
     }
   }
 
-  // Duplicate dosya kontrolü
-  async function checkDuplicateFile(fileName, fileSize) {
-    try {
-      // Thumbnails klasörünü kontrol et
-      const thumbnailsRef = ref(storage, 'thumbnails/');
-      const thumbnailsList = await listAll(thumbnailsRef);
-      
-      // Originals klasörünü kontrol et
-      const originalsRef = ref(storage, 'originals/');
-      const originalsList = await listAll(originalsRef);
-      
-      // Thumbnail dosyası var mı kontrol et
-      const thumbnailExists = thumbnailsList.items.some(item => {
-        const itemName = item.name.replace('_thumb', '');
-        return itemName === fileName;
-      });
-      
-      // Original dosyası var mı kontrol et
-      const originalExists = originalsList.items.some(item => {
-        return item.name === fileName;
-      });
-      
-      if (thumbnailExists || originalExists) {
-        console.log(`Dosya zaten mevcut: ${fileName}`);
-        return true; // Duplicate var
-      }
-      
-      return false; // Duplicate yok
-    } catch (error) {
-      console.error('Duplicate kontrol hatası:', error);
-      return false; // Hata durumunda yükle
-    }
-  }
 
   // Thumbnail oluşturma fonksiyonu (400px genişlik, daha iyi görünüm)
   function createThumbnail(file) {
@@ -1116,7 +1080,18 @@
           
           // Dosya adını bul (thumbnail adından)
           const thumbnailName = thumbnailRef.name;
-          const fileName = thumbnailName.replace('_thumb', '');
+          // Thumbnail adından orijinal dosya adını çıkar
+          // Format: timestamp_originalname_thumb.extension
+          let fileName;
+          const thumbIndex = thumbnailName.indexOf('_thumb');
+          if (thumbIndex > -1) {
+            const beforeThumb = thumbnailName.substring(0, thumbIndex);
+            const afterThumb = thumbnailName.substring(thumbIndex + 6); // '_thumb' uzunluğu 6
+            const timestampIndex = beforeThumb.indexOf('_');
+            fileName = timestampIndex > -1 ? beforeThumb.substring(timestampIndex + 1) + afterThumb : beforeThumb + afterThumb;
+          } else {
+            fileName = thumbnailName; // Fallback
+          }
           
           const galleryItem = document.createElement("div");
           galleryItem.className = "gallery-item";
